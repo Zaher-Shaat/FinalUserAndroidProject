@@ -1,13 +1,9 @@
 package com.example.finalprojectfirebase;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,14 +39,13 @@ public class SignupFragment extends Fragment {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       View V= inflater.inflate(R.layout.fragment_signup, container, false);
+        View V = inflater.inflate(R.layout.fragment_signup, container, false);
         ed_name = V.findViewById(R.id.ed_name);
-        ed_email =V.findViewById(R.id.ed_email);
+        ed_email = V.findViewById(R.id.ed_email);
         ed_pass = V.findViewById(R.id.ed_pass);
         btn_signup = V.findViewById(R.id.btn_signup);
         tv_login = V.findViewById(R.id.tv_login);
@@ -71,8 +71,9 @@ public class SignupFragment extends Fragment {
                 ft.commit();
             }
         });
-       return V;
+        return V;
     }
+
     private void signup() {
         String fullName = ed_name.getText().toString();
         String email = ed_email.getText().toString();
@@ -98,20 +99,29 @@ public class SignupFragment extends Fragment {
                             data.put("email", email);
                             firebaseFirestore.collection("users")
                                     .add(data).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<DocumentReference> task) {
-                                            if (task.isSuccessful()) {
-                                                System.out.println("insert user to Firestore");
-                                            } else {
-                                                System.out.println("insert failed");
-                                            }
-                                        }
-                                    });
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentReference> task) {
+                                    if (task.isSuccessful()) {
+                                        System.out.println("insert user to Firestore");
+                                    } else {
+                                        System.out.println("insert failed");
+                                    }
+                                }
+                            });
 
                         }
 
+                        SharedPreferences sharedPreferences = getContext().getSharedPreferences("loginState", Context.MODE_PRIVATE);
 
-                        startActivity(new Intent(getActivity(), Storeuser.class));
+// Creating an Editor object to edit(write to the file)
+                        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+// Storing the key and its value as the data fetched from edittext
+                        myEdit.putBoolean("loginState", true);
+                        myEdit.commit();
+                        Intent goToHomeIntent=new Intent(getActivity(), Storeuser.class);
+                        startActivity(goToHomeIntent);
+                        getActivity().finish();
 
                     } else {
                         Toast.makeText(getActivity(), "Error while create new account", Toast.LENGTH_SHORT).show();

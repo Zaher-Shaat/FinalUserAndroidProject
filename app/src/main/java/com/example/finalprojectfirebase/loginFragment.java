@@ -1,13 +1,9 @@
 package com.example.finalprojectfirebase;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -82,7 +83,16 @@ public class loginFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
+                        SharedPreferences sharedPreferences = getContext().getSharedPreferences("loginState", Context.MODE_PRIVATE);
+
+// Creating an Editor object to edit(write to the file)
+                        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+// Storing the key and its value as the data fetched from edittext
+                        myEdit.putBoolean("loginState", true);
+                        myEdit.commit();
                         startActivity(new Intent(getActivity(), Storeuser.class));
+                        getActivity().finish();
                         Toast.makeText(getActivity(), "Login Successfully", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getActivity(), "something error", Toast.LENGTH_SHORT).show();
