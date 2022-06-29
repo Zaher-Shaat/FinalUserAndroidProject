@@ -6,7 +6,9 @@
         <entry key="..\:/Users/zaher/AndroidStudioProjects/FinalProjectFirebase/app/src/main/res/drawable/add.xml" value="0.2203125" />
         <entry key="..\:/Users/zaher/AndroidStudioProjects/FinalProjectFirebase/app/src/main/res/drawable/ic_baseline_exit_to_app_24.xml" value="0.1640625" />
         <entry key="..\:/Users/zaher/AndroidStudioProjects/FinalProjectFirebase/app/src/main/res/layout/activity_main.xml" value="0.12771739130434784" />
-        <entry key="..\:/Users/zaher/AndroidStudioProjects/FinalProjectFirebase/app/src/main/res/layout/fragment_signup.xml" value="0.7312186978297162" />
+        <entry key="..\:/Users/zaher/AndroidStudioProjects/FinalProjectFirebase/app/src/main/res/layout/activity_splash.xml" value="0.16041666666666668" />
+        <entry key="..\:/Users/zaher/AndroidStudioProjects/FinalProjectFirebase/app/src/main/res/layout/fragment_login.xml" value="0.128125" />
+        <entry key="..\:/Users/zaher/AndroidStudioProjects/FinalProjectFirebase/app/src/main/res/layout/fragment_signup.xml" value="0.1286231884057971" />
         <entry key="..\:/Users/zaher/AndroidStudioProjects/FinalProjectFirebase/app/src/main/res/layout/storeuser.xml" value="0.14375" />
       </map>
     </option>
