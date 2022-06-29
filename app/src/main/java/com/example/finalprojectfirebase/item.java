@@ -25,7 +25,7 @@ public class item implements Serializable {
     private String code;
     private String price;
     private String image;
-
+// malabsi User
     public item() {
 
     }
