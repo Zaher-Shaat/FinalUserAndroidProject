@@ -4,11 +4,11 @@ package com.example.finalprojectfirebase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -18,10 +18,16 @@ import java.util.List;
 
 public class clothesAdapter extends RecyclerView.Adapter<clothesAdapter.ClothingViewHOlder> {
     private List<item> clothingList;
+    private ClothesClickListner clothesClickListner;
+
 
     public clothesAdapter(List<item> clothingList) {
-
         this.clothingList = clothingList;
+    }
+
+    public clothesAdapter(List<item> clothingList, ClothesClickListner clothesClickListner) {
+        this.clothingList = clothingList;
+        this.clothesClickListner = clothesClickListner;
     }
 
     @NonNull
@@ -33,7 +39,6 @@ public class clothesAdapter extends RecyclerView.Adapter<clothesAdapter.Clothing
 
     @Override
     public void onBindViewHolder(@NonNull ClothingViewHOlder holder, int position) {
-
         item i = clothingList.get(position);
         holder.code.setText(i.getCode());
         holder.price.setText(i.getPrice());
@@ -41,7 +46,12 @@ public class clothesAdapter extends RecyclerView.Adapter<clothesAdapter.Clothing
             Glide.with(holder.itemView).load(i.getImage()).into(holder.ImageView);
         }
 
-
+        holder.ib.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clothesClickListner.onDeleteListiner(i);
+            }
+        });
     }
 
     @Override
@@ -49,9 +59,11 @@ public class clothesAdapter extends RecyclerView.Adapter<clothesAdapter.Clothing
         return clothingList.size();
     }
 
-    public class ClothingViewHOlder extends RecyclerView.ViewHolder {
-        private TextView code,price;
-        private ImageView ImageView;
+    public static class ClothingViewHOlder extends RecyclerView.ViewHolder {
+        private final TextView code;
+        private final TextView price;
+        private final ImageView ImageView;
+        private final ImageButton ib;
 
         public ClothingViewHOlder(@NonNull View itemView) {
             super(itemView);
@@ -59,6 +71,7 @@ public class clothesAdapter extends RecyclerView.Adapter<clothesAdapter.Clothing
             code = itemView.findViewById(R.id.clothing_code_tv);
             price =itemView.findViewById(R.id.price);
             ImageView = itemView.findViewById(R.id.clothing_image);
+            ib = itemView.findViewById(R.id.clothes_delete);
         }
     }
 }

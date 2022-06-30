@@ -1,5 +1,6 @@
 package com.example.finalprojectfirebase;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -22,28 +24,38 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class Storeuser extends AppCompatActivity {
+public class Store extends AppCompatActivity {
     private static final String TAG = "store";
+    BottomNavigationView btn;
+    FloatingActionButton btn_f, signOutBtn;
     ArrayList<item> items = new ArrayList<>();
-    FloatingActionButton signOutBtn;
     private RecyclerView store_clothes;
-    clothesAdapter adapter;
+   clothesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.storeuser);
+        setContentView(R.layout.activity_store);
         store_clothes = findViewById(R.id.store_clothes);
+        btn_f = findViewById(R.id.btn_f);
         signOutBtn = findViewById(R.id.signOutBtn);
-        store_clothes.setHasFixedSize(true);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
-        store_clothes.setLayoutManager(gridLayoutManager);
         signOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signOut();
             }
         });
+
+        btn_f.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Store.this, item.class);
+                startActivity(i);
+            }
+        });
+        store_clothes.setHasFixedSize(true);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
+        store_clothes.setLayoutManager(gridLayoutManager);
     }
 
     @Override
@@ -65,7 +77,6 @@ public class Storeuser extends AppCompatActivity {
                     for (DataSnapshot snap : data) {
                         item i = snap.getValue(item.class);
                         items.add(i);
-
                     }
                     adapter = new clothesAdapter(items, new ClothesClickListner() {
                         @Override
@@ -77,11 +88,11 @@ public class Storeuser extends AppCompatActivity {
                         }
                     });
                     store_clothes.setAdapter(adapter);
-
+//
 
                 } else {
                     String error = task.getException().getMessage();
-                    Toast.makeText(Storeuser.this, "failed " + error, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Store.this, "failed " + error, Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -101,9 +112,9 @@ public class Storeuser extends AppCompatActivity {
 // Storing the key and its value as the data fetched from edittext
         myEdit.putBoolean("loginState", false);
         myEdit.commit();
-        Intent signOutIntent = new Intent(Storeuser.this, MainActivity.class);
+        Intent signOutIntent = new Intent(Store.this, MainActivity.class);
         signOutIntent.putExtra("LoginState", false);
         startActivity(signOutIntent);
-        finish();
+
     }
 }

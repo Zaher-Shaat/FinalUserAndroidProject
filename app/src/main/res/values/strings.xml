@@ -1,9 +1,11 @@
 <resources>
-    <string name="app_name">Alwaqr</string>
+    <string name="app_name">ملابسي المستخدم</string>
     <string name="FullName">Full Name</string>
     <string name="Email">Email Address</string>
     <string name="Password">Password </string>
     <string name="SIGNUP"> SIGNUP</string>
+    <string name="SIGNIN"> SignIn</string>
+
     <string name="account"> You have account?Login</string>
     <string name="accounts">Dont have account ?Sign up</string>
     <string name="user">Login as a user</string>

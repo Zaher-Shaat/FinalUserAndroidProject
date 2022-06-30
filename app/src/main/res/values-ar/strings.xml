@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">الوقار</string>
+    <string name="app_name">ملابسي المستخدم</string>
     <string name="FullName">الاسم</string>
     <string name="Email">البريد الالكتروني</string>
     <string name="Password">كلمة السر</string>
-    <string name="SIGNUP">تسجيل دخول</string>
+    <string name="SIGNUP">التسجيل</string>
+    <string name="SIGNIN"> تسجيل دخول</string>
     <string name="account"> لديك حساب؟تسجيل دخول</string>
     <string name="accounts">ليس لديك حساب؟انشاء حساب</string>
     <string name="user"> تسجيل الدخول كمستخدم </string>

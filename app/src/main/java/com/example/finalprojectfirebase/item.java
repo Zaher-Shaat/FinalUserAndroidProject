@@ -1,43 +1,31 @@
 package com.example.finalprojectfirebase;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-
-import java.io.Serializable;
-
-public class item implements Serializable {
+public class item {
     private String id;
     private String code;
     private String price;
     private String image;
-// malabsi User
+    private String desc;
+
     public item() {
 
     }
 
-    public item(String id, String code, String price, String image) {
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public item(String id, String code, String price, String image, String desc) {
         this.id = id;
         this.code = code;
         this.price = price;
         this.image = image;
-
+        this.desc = desc;
     }
-
 
     public String getId() {
         return id;
@@ -78,7 +66,7 @@ public class item implements Serializable {
                 ", code='" + code + '\'' +
                 ", price='" + price + '\'' +
                 ", image='" + image + '\'' +
+                ", description='" + desc +
                 '}';
     }
-
 }
